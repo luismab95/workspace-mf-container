@@ -1,0 +1,21 @@
+{
+    "mf-authentication": {
+        "name": "Authentication",
+        "remoteEntry": "http://localhost:4201/remoteEntry.js",
+        "path": "authentication",
+        "exposedModule": "AuthenticationModule",
+        "isAuthRoute": true,
+        "typeRemote": "module",
+        "moduleName": ""
+
+    },
+    "mf-security": {
+        "name": "Perfil",
+        "remoteEntry": "http://localhost:4202/remoteEntry.js",
+        "path": "user",
+        "exposedModule": "UserModule",
+        "isAuthRoute": false,
+        "typeRemote": "module",
+        "moduleName": "Usuario"
+    }
+}

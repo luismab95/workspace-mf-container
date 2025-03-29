@@ -1,0 +1,84 @@
+<div class="logo-wrapper">
+    <a [routerLink]="['/admin/dashboard/home']">
+        <img class="img-fluid" [src]="apiUrlStatics + '/images/logo/logo.png'" alt="logo">
+    </a>
+    <div class="back-btn">
+        <fa-icon class="text-white" (click)="openMenu()" [icon]="faAngleLeft"></fa-icon>
+    </div>
+    <div class="toggle-sidebar" (click)="openMenu()">
+        <fa-icon class="status_toggle middle sidebar-toggle text-white" [icon]="faBars"></fa-icon>
+    </div>
+</div>
+<div class="logo-icon-wrapper">
+    <a [routerLink]="['/dashboard/default']">
+        <img class="img-fluid" [src]="apiUrlStatics + '/images/logo/logo-icon.png'" alt="icon">
+    </a>
+</div>
+<nav class="sidebar-main">
+    <div class="left-arrow" id="left-arrow" [class.d-none]="leftArrowNone" (click)="scrollToLeft()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+    </div>
+    <div id="sidebar-menu"
+        [ngStyle]="{ marginLeft: this.layout.config.settings.sidebar_type == 'horizontal-wrapper' ? margin + 'px' : '0px' }">
+        <ul class="sidebar-links theme-scrollbar d-flex flex-column" id="simple-bar">
+            <li class="back-btn">
+                <a href="javascript:void(0)">
+                    <img class="img-fluid" [src]="apiUrlStatics + '/images/logo/logo-icon.png'" alt="logo">
+                </a>
+                <div class="mobile-back text-end">
+                    <span>Atras</span>
+                    <fa-icon aria-hidden="true" class="ps-2" [icon]="faAngleRight"></fa-icon>
+                </div>
+            </li>
+            <ng-container *ngTemplateOutlet="recursiveMenu; context: { $implicit: menuItems }"></ng-container>
+            <ng-template #recursiveMenu let-menuItems>
+                @for(item of menuItems; track item){
+                <li [ngClass]="{'sidebar-list':item.level == 1,'sidebar-main-title':item.headTitle1 }">
+                    @if(item.headTitle1){
+                    <div>
+                        <h6>{{item.headTitle1}}</h6>
+                    </div>
+                    }
+                    @if(item.type === 'extTabLink'){
+                    <a href="{{ !item.type ? null : item.path }}">
+                        {{ item.title }}
+                    </a>
+                    }
+                    @else{
+                    @if(!item.headTitle1){
+                    <a [ngClass]="{'sidebar-link sidebar-title' : item.level == 1, 'submenu-title' : item.level == 2 ,'actived': item.active && item.level === 1}"
+                        [routerLink]="item.path" (click)="toggleMenu(item)" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        @if(item.icon && item.level == 1){
+                        <fa-icon class="text-white" [icon]="item.icon"></fa-icon>
+                        }
+                        @if(item.level == 1){
+                        <span>{{item.title }}</span>
+                        }@else{
+                        {{item.title}}
+                        }
+                        <div class="according-menu">
+                            @if(item.children){
+                            <fa-icon class="pull-right text-white"
+                                [icon]="item.active ? faAngleDown : faAngleRight"></fa-icon>
+                            }
+                        </div>
+                    </a>
+                    }
+                    }
+                    @if(item.children){
+                    <ul [ngClass]="{ 'sidebar-submenu': item.level == 1, 'nav-sub-childmenu submenu-content' : item.level == 2 }"
+                        [style.display]="item.active  ? 'block' : 'none'">
+                        <ng-container
+                            *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
+                    </ul>
+                    }
+                </li>
+                }
+            </ng-template>
+        </ul>
+        <div class="right-arrow" id="right-arrow" [class.d-none]="rightArrowNone" (click)="scrollToRight()">
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+        </div>
+    </div>
+</nav>

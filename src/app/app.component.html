@@ -1,0 +1,6 @@
+<mf-container-loader [start]="true" [loading]="loading"></mf-container-loader>
+@if(loading){
+<mf-container-loader [start]="false" [loading]="true"></mf-container-loader>
+}
+<mf-container-tap-to-top></mf-container-tap-to-top>
+<router-outlet />

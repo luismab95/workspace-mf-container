@@ -1,0 +1,19 @@
+@if(start()){
+<div class="container-loader" [class.loader-hide]="!show()">
+  <div class="container-loader"></div>
+  <div class="loader d-flex justify-content-center flex-column align-items-center">
+    <h2>Un momento</h2>
+    <div class="pt-1 pb-3">Estamos recogiendo tu información</div>
+    <span class="loader-gif"></span>
+  </div>
+</div>
+}
+
+@if(loading()){
+<div class="container-loader"></div>
+<div class="loader d-flex justify-content-center flex-column align-items-center">
+  <h2>Un momento</h2>
+  <div class="pt-1 pb-3">Estamos recogiendo tu información</div>
+  <span class="loader-gif"></span>
+</div>
+}

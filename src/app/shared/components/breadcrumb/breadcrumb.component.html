@@ -1,0 +1,26 @@
+<div class="page-title">
+    <div class="row">
+        <div class="col-6">
+            <h4>{{title}}</h4>
+        </div>
+        <div class="col-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="'/admin/dashboard/home'">
+                        <fa-icon class="text-secondary" [icon]="faHome"></fa-icon>
+                    </a>
+                </li>
+                @if(breadcrumbs?.parentBreadcrumb){
+                <li class="breadcrumb-item">
+                    {{breadcrumbs?.parentBreadcrumb}}
+                </li>
+                }
+                @if(breadcrumbs?.breadcrumb){
+                <li class="breadcrumb-item active">
+                    {{breadcrumbs?.breadcrumb}}
+                </li>
+                }
+            </ol>
+        </div>
+    </div>
+</div>
